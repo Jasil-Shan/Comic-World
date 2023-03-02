@@ -1,0 +1,31 @@
+
+.navb{
+    width: 100%;
+    height: 15vh;
+    background-color: #2B2B2B; 
+}
+
+.title{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+    font-size: xx-large;
+    color: yellow;
+}
+.contain{
+    display: flex;
+    background-color: #2B2B2B;
+}
+.im{
+    display: flex;
+    width: 50%;
+    height: 100vh;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+    width: 50%;
+    height: 100vh;
+    background-color: #2B2B2B;
+
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <title>Dashboard - Admin </title>
+   <meta name="robots" content="noindex, nofollow">
+   <meta content="" name="description">
+   <meta content="" name="keywords">
+   <link href="assets/img/favicon.png" rel="icon">
+   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+   <link href="https://fonts.gstatic.com" rel="preconnect">
+   <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet">
+   <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/admin/css/bootstrap-icons.css" rel="stylesheet">
+   <link href="/admin/css/boxicons.min.css" rel="stylesheet">
+   <link href="/admin/css/quill.snow.css" rel="stylesheet">
+   <link href="/admin/css/quill.bubble.css" rel="stylesheet">
+   <link href="/admin/css/remixicon.css" rel="stylesheet">
+   <link href="/admin/css/simple-datatables.css" rel="stylesheet">
+   <link href="/admin/css/style.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+
+<body>
+   <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between"> <a href="index.html"
+            class="logo d-flex align-items-center"> <img src="assets/img/logo.png" alt=""> <span
+               class="d-none d-lg-block">Admin</span> </a></i></div>
+      <div><a class="btn btn-sm btn-danger" href="/admin/Adminlogout">Logout</a></div>
+
+
+      <nav class="header-nav ms-auto">
+         <ul class="d-flex align-items-center">
+         </ul>
+      </nav>
+   </header>
+   <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+         <li class="nav-item"> <a class="nav-link collapsed" href="/admin/dash"> <span>Dashboard</span> </a></li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" href="/admin/user"><span>Users</span> </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link " data-bs-target="#components-nav" href="/admin/products"><span>Products</span> </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" href="/admin/category"> <span>Category</span>
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="/admin/banner"><span>Banner</span>
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="/admin/coupon"><span>Coupon</span>
+            </a>
+         </li>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
+               href="/admin/order"><span>Orders</span>
+            </a>
+         </li>
+   </aside>
+   <main id="main" class="main">
+
+      <div class="w-100 d-flex flex-row-reverse">
+         <form class="d-flex" role="search" method="post" action="/admin/SearchProduct">
+            <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="key">
+            <button class="btn btn-sm btn-outline-success me-3" type="submit">Search</button>
+         </form>
+      </div>
+
+      <div class="mt-5">
+         <a href="/admin/AddProduct" class="btn btn-warning text-light">New Product <i
+               class=" ms-1 bi bi-person-fill-add"></i> </a>
+         {{#if userUpdated}}
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <b>User Updated successfully</b>
+            <a type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+         </div>
+         {{/if}}
+         <div class="card mt-3">
+            <div class="card-body pt-2">
+
+               <table class="table table-hover table-borderless mt-2 ">
+                  <thead>
+                     <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Sub-category</th>
+                        <th scope="col">MRP</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {{#each Product}}
+                     <tr>
+                        <th scope="row">{{inc @index}}</th>
+                        <td><img width="50px" height="60px" src="/admin/images/{{this.image.[0].filename}}" alt=""></td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.category}}</td>
+                        <td>{{this.subCategory}}</td>
+                        <td>{{this.mrp}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.stock}}</td>
+                        <td>{{#if this.Status }}
+                           <p>Listed</p>
+                           {{else}}
+                           <p>Not Listed</p>
+                           {{/if}}
+                        </td>
+
+                        <td>
+                           <a href="/admin/EditProduct/{{this._id}}" class="btn btn-sm btn-success">Edit</a>
+                           {{#if this.Status}}
+                           <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#{{this._id}}">
+                              UnList
+                           </a>
+                           <!-- The Modal -->
+                           <div class="modal" id="{{this._id}}">
+                              <div class="modal-dialog modal-dialog-centered">
+                                 <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                       <h4 class="modal-title">Are you sure !</h4>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                       Do you really want to UnList this Product ?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-sm btn-danger"
+                                          data-bs-dismiss="modal">No</button>
+                                       <button onclick="{window.location.href='/admin/UnListProduct/{{this._id}}'}"
+                                          class="btn btn-sm btn-danger">Yes</button>
+
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                           {{else}}
+                           <!-- modal start -->
+                           <a class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#{{this._id}}">
+                              List
+                           </a>
+                           <!-- The Modal -->
+                           <div class="modal" id="{{this._id}}">
+                              <div class="modal-dialog modal-dialog-centered">
+                                 <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                       <h4 class="modal-title">Are you sure !</h4>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                       Do you really want to List this Product ?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-sm btn-danger"
+                                          data-bs-dismiss="modal">No</button>
+                                       <button onclick="{window.location.href='/admin/ListProduct/{{this._id}}'}"
+                                          class="btn btn-sm btn-danger">Yes</button>
+
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                           {{/if}}
+                        </td>
+                     </tr>
+                     {{/each}}
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+
+
+
+   </main>
+   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+         class="bi bi-arrow-up-short"></i></a>
+   <script src="assets/js/apexcharts.min.js"></script>
+   <script src="assets/js/bootstrap.bundle.min.js"></script>
+   <script src="assets/js/chart.min.js"></script>
+   <script src="assets/js/echarts.min.js"></script>
+   <script src="assets/js/quill.min.js"></script>
+   <script src="assets/js/simple-datatables.js"></script>
+   <script src="assets/js/tinymce.min.js"></script>
+   <script src="assets/js/validate.js"></script>
+   <script src="assets/js/main.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+
+</body>
+
+</html>

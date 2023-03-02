@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		  <link rel="preload" href="https://use.typekit.net/jpk7bsf.css" as="style" onload="this.rel='stylesheet'" />
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/user/css/styles.css" rel="stylesheet" />
+	<title>Page Not Found</title>
+	 
+	<style>
+		/*======================
+    404 page
+=======================*/
+	* {
+	font-family: "proxima-nova", ubuntu, helvetica, sans-serif;
+}
+
+		.page_404 {
+			padding: 40px 0;
+			background: #fff;
+			font-family: 'Arvo', serif;
+		}
+
+		.page_404 img {
+			width: 100%;
+		}
+
+		.four_zero_four_bg {
+
+			background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+			height: 400px;
+			background-position: center;
+		}
+
+
+		.four_zero_four_bg h1 {
+			font-size: 80px;
+		}
+
+		.four_zero_four_bg h3 {
+			font-size: 80px;
+		}
+
+		.link_404 {
+			color: #fff !important;
+			padding: 10px 20px;
+			background: #39ac31;
+			margin: 20px 0;
+			display: inline-block;
+		}
+
+		.contant_box_404 {
+			margin-top: -50px;
+		}
+		.abscenter{
+			position: absolute;
+			top: 50%;
+			width: 100%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+		}
+        body{
+            background-color: black;
+        }
+	</style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0000004a;">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand text-warning fw-bold fs-2" href="#!">Comic World</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link " aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Comic">Comics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/collectables">Collectables</a></li>
+                    {{!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                        </ul>
+                    </li> --}}
+                </ul>
+                <form class="d-flex">
+                    <a href="/Cart" class="btn text-light btn-sm me-3" type="submit">
+                        <i class="bi-cart-fill me-2"></i><span>Cart</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </a>
+                    <a href="/Wishlist" class="btn text-light btn-sm  me-3" type="submit">
+                        <i class="bi bi-bag-heart-fill me-2"></i><span>Wishlist</span>
+                        {{!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> --}}
+                    </a>
+                    {{#if Log}}
+                    {{!-- <a href="/Profile" class="btn btn-sm btn-outline-light" type="submit">
+                        <i class="bi bi-person-circle me-2"></i>{{Log.name}}</i>
+
+                    </a> --}}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person-circle me-2"></i> {{Log.name}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/UserProfile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/UserLogout">Logout</a></li>
+                        </ul>
+                    </div>
+                    {{else}}
+                    <a href="/Login" class="btn btn-sm btn-outline-warning" type="submit">
+                        <i class="bi bi-door-open"></i></i>
+                        Login
+                    </a>{{/if}}
+                </form>
+            </div>
+        </div>
+    </nav>
+	<section class="page_404 pt-3 abscenter">
+			<div class="container pt-3">
+				<div class="row">
+					<div class="col-sm-12 pt-3">
+						<div class="text-center">
+							<div class="four_zero_four_bg mb-3">
+								<h1 class="text-center text-danger pb-3">404</h1>
+							</div>
+
+							<div class="contant_box_404">
+								<h3 class="h2">
+									Look like you're lost
+								</h3>
+
+								<p>the page you are looking for not is available!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+</body>
+
+</html>

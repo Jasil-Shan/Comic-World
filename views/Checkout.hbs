@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>Checkout</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+
+    <style>
+        .container {
+            max-width: 960px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+
+</head>
+
+<body class="bg-dark text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0000004a;">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand text-warning fw-bold fs-2" href="#!">Comic World</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Comic">Comics</a></li>
+                    <li class="nav-item"><a class="nav-link " href="/collectables">Collectables</a></li>
+                </ul>
+                <form class="d-flex text-center">
+                    <a href="/Cart" class="btn btn-sm btn-outline-light me-3" type="submit">
+                        <i class="bi-cart-fill me-2"></i><span>Cart</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </a>
+                    <a href="/Wishlist" class="btn btn-sm btn-outline-light me-3" type="submit">
+                        <i class="bi bi-bag-heart-fill me-2"></i><span>Wishlist</span>
+                        {{!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> --}}
+                    </a>
+                    {{#if Log}}
+                    {{!-- <a href="/Profile" class="btn btn-sm btn-outline-light" type="submit">
+                        <i class="bi bi-person-circle me-2"></i>{{Log.name}}</i>
+
+                    </a> --}}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person-circle me-2"></i> {{Log.name}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/UserProfile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/UserLogout">Logout</a></li>
+                        </ul>
+                    </div>
+                    {{else}}
+                    <a href="/Login" class="btn btn-sm btn-outline-warning" type="submit">
+                        <i class="bi bi-door-open"></i></i>
+                        Login
+                    </a>{{/if}}
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <main>
+            <div class="py-5 text-center">
+                <h1>Checkout</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-4 order-md-last" style="height: fit-content;">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Your cart</span>
+                        {{!-- <span class="badge bg-primary rounded-pill">3</span> --}}
+                    </h4>
+                    <ul class="list-group mb-3">
+                        {{!-- {{#each proPrice}} --}}
+                        {{#each products}}
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">{{this.name}}</h6>
+                                {{!-- <small class="text-muted">{{this.description}}</small> --}}
+                            </div>
+                            <span class="text-muted"><i class="bi bi-currency-rupee"></i>{{ this.totalPrice }}</span>
+                        </li>
+                        {{/each}}
+
+                        {{#if Result}}
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <span class="text-success">Coupon Applied</span>
+                                <h6>Promo code </h6>
+                                <span>{{Code}}</span>
+                            </div>
+                            <span class="text-success"><i class="bi bi-currency-rupee"></i>−{{Discount}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total </span>
+                            <strong><i class="bi bi-currency-rupee"></i>{{Result}}</strong>
+                        </li>
+                        {{else}}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total</span>
+                            <strong><i class="bi bi-currency-rupee"></i>{{TotalAmount}}</strong>
+                        </li>
+                        <form class="card mt-2 p-2" method="get" action="/Checkout">
+                            {{#if Invalid}}<span class="text-danger">Coupon not Found</span>{{/if}}
+                            <div class="input-group">
+                                <input type="text" name="Coupon" class="form-control" placeholder="Promo code">
+                                <button type="submit" class="btn btn-secondary">Redeem</button>
+                            </div>
+                        </form>
+                        {{/if}}
+                    </ul>
+
+                    {{!-- Address --}}
+
+                    <h4 class="d-flex mt-5 justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Saved Address</span>
+                    </h4>
+                    <form class="form" action="/checkout" id="order" method="post">
+                        <div class="card">
+                            <ul class="card-body list-group ms-3 mb-3">
+                                {{#each address}}
+                                <li class="list-group-item">
+                                    <a href="/checkout?_id={{this.id}}">Select</a>
+                                    <div class="text-center">
+                                        <h6 class="my-0">{{this.name}}</h6>
+                                        <small class="text-muted">{{this.email}}</small><br>
+                                        <small class="text-muted">{{this.address}}</small>
+                                        <small class="text-muted">{{this.pincode}},</small>
+                                        <small class="text-muted">{{this.landmark}}</small><br>
+                                        <small class="text-muted">{{this.country}}</small>
+                                        <small class="text-muted">{{this.state}}</small><br>
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Billing address</h4>
+                    <div class="row g-3">
+                        <div>
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" name="name" class="form-control" id="firstName" placeholder=""
+                                value="{{Eaddress.name}}">
+                            <div class="invalid-feedback">
+                                Valid first name is.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email <span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="email" name="email" class="form-control" id="email"
+                                placeholder="you@example.com" value="{{Eaddress.email}}">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" name="address" value="{{Eaddress.address}}" class="form-control"
+                                id="address" placeholder="1234 Main St">
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address2" class="form-label">LandMark <span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="text" value="{{Eaddress.landmark}}" name="landmark" class="form-control"
+                                id="address2" placeholder="Apartment or suite">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="country" class="form-label">Country</label>
+                            <select name="country" class="form-select" id="country">
+                                <option value="India">India</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" class="form-control" value="{{Eaddress.state}}" name="state">
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="zip" class="form-label">Pincode</label>
+                            <input type="text" name="pincode" value="{{Eaddress.pincode}}" class="form-control" id="zip"
+                                placeholder="">
+                            <div class="invalid-feedback">
+                                Zip code.
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="form-check">
+                        <input type="checkbox" name="status" value="true" class="form-check-input" id="save-info">
+                        <label class="form-check-label" for="save-info">Save this information for next
+                            time</label>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h4 class="mb-3">Payment</h4>
+
+                    <div class="my-3">
+                        <div class="form-check">
+                            <input id="credit" name="paymentMethod" value="Online" type="radio"
+                                class="form-check-input">
+                            <label class="form-check-label" for="credit">Online Payment</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="paypal" name="paymentMethod" value="COD" type="radio" class="form-check-input"
+                                checked>
+                            <label class="form-check-label" for="paypal">Cash On Delivery</label>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2017–2022 Comic World</p>
+
+        </footer>
+    </div>
+
+    {{!-- <script>
+        {{!-- function submitCheckOut() {
+            axios.post('/checkout', document.querySelector('#order'), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((result) => {
+                if (result.data.COD) {
+                    window.location.href = '/orderSuccess'
+                } else {
+                    razorpayPayment(result.data)
+                }
+            })
+        }
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_XWC3duVSrJbw9K", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Comic-World", //your business name
+                "description": "Online Transaction",
+                "image": "https://i.ibb.co/zSMfgvM/Logo.png",
+                "order_id": order.result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+
+                    verifyPayment(response, order)
+                },
+                "prefill": {
+                    "name": order.name, //your customer's name
+                    "email": order.email,
+                    "contact": order.phone
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+        function verifyPayment(payment, order) {
+            console.log('verify')
+            axios.post('/verifyPayment', { payment, order }).then((resp) => {
+                if (resp.data.success) {
+                    window.location.href = '/orderSuccess'
+                } else {
+                    console.log("Payment failed")
+                }
+            })
+        } --}}
+
+    </script> --}}
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>

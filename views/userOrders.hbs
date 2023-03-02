@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/user/css/styles.css" rel="stylesheet" />
+</head>
+
+<body style="background-color:rgb(0, 0, 0);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgba(0, 0, 0, 0.734);">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand text-warning fw-bold fs-2" href="#!">Comic World</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link " aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Comic">Comics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/collectables">Collectables</a></li>
+                    {{!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                        </ul>
+                    </li> --}}
+                </ul>
+                <form class="d-flex">
+                    <a href="/Cart" class="btn text-light btn-sm  me-3" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                    </a>
+                    <a href="/Wishlist" class="btn text-light btn-sm  me-3" type="submit">
+                        <i class="bi bi-bag-heart-fill me-2"></i><span>Wishlist</span>
+                        {{!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> --}}
+                    </a>
+                    {{#if Log}}
+                    {{!-- <a href="/Profile" class="btn btn-sm btn-outline-light" type="submit">
+                        <i class="bi bi-person-circle me-2"></i>{{Log.name}}</i>
+
+                    </a> --}}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person-circle me-2"></i> {{Log.name}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/UserProfile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/UserLogout">Logout</a></li>
+                        </ul>
+                    </div>
+                    {{else}}
+                    <a href="/Login" class="btn btn-sm btn-outline-warning" type="submit">
+                        <i class="bi bi-door-open"></i></i>
+                        Login
+                    </a>{{/if}}
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Section-->
+    <section>
+        <div class="container mt-5">
+            <h2>Order History</h2>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {{#each Orders}}
+                {{!-- {{#if this.Status}} --}}
+                <div class="col mb-5 ">
+                    <div class="card text-white rounded-5 " style="width: fit-content; background-color: rgb(0, 0, 0);">
+                        {{#if_eq this.orderStatus "Pending"}}
+                        <div class="badge bg-warning text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            {{this.orderStatus}}
+                        </div>
+                        {{/if_eq}}
+                        {{#if_eq this.orderStatus "Cancelled"}}
+                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            {{this.orderStatus}}
+                        </div>
+                        {{/if_eq}}
+                        {{#if_eq this.orderStatus "Delivered"}}
+                        <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            {{this.orderStatus}}
+                        </div>
+                        {{/if_eq}}
+                         {{#if_eq this.orderStatus "Shipped"}}
+                        <div class="badge bg-info text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            {{this.orderStatus}}
+                        </div>
+                        {{/if_eq}}
+                         {{#if_eq this.orderStatus "Out for Delivery"}}
+                        <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            {{this.orderStatus}}
+                        </div>
+                        {{/if_eq}}
+                        <div>
+                            <!-- Product image-->
+                            <img class="rounded-5 card-img-top img-fluid" style="height:295px ;"
+                                src="/admin/images/{{this.product.image.[0].filename}}" alt="..." />
+                        </div>
+                        <!-- Product details-->
+                        <div class="card-body p-3">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{this.product.name}}</h5>
+                                Total:<i class="bi bi-currency-rupee"></i>{{this.total}}
+                                <span class="ms-2 text-muted"> Quantity:{{this.quantity}}</span>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a type="button" data-bs-toggle="modal"
+                                    data-bs-target="#{{this._id}}" class="btn btn-outline-light mt-auto">Track</a>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content text-white"
+                                    style="background-color: #18171b; border-radius: 10px;">
+                                    <div class="modal-header border-bottom-0">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+
+                                    </div>
+                                    <div class="modal-body text-start px-4 pt-0 pb-4">
+                                        <div class="text-center">
+                                            <h5 class="mb-3">Order Status</h5>
+                                            <h5 class="mb-5">Order ID- {{this.orderId}}</h5>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-5">
+                                            <div class="text-center">
+                                                <i class="fas fa-circle"></i>
+                                                <p>Order placed</p>
+                                            </div>
+                                            <div class="text-center">
+                                                <i class="fas fa-circle"></i>
+                                                <p>In Transit</p>
+                                            </div>
+                                            <div class="text-center">
+                                                <i class="fas fa-circle"></i>
+                                                <p class="lead fw-normal">Out of Delivery</p>
+                                            </div>
+                                            <div class="text-center">
+                                                <i class="fas fa-circle" style="color: #979595;"></i>
+                                                <p style="color: #979595;">Delivered</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-4 text-center">
+                                                <p class="lead fw-normal">Shipped with</p>
+                                            </div>
+                                            <div class="col-md-4 text-center">
+                                                <p class="lead fw-normal">UPS Expedited</p>
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <i class="fas fa-phone fa-lg"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-4 text-center">
+                                                <p class="lead fw-normal">Estimated Delivery</p>
+                                            </div>
+                                            <div class="col-md-4 text-center">
+                                                <p class="lead fw-normal">02/12/2023</p>
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <i class="fas fa-envelope fa-lg"></i>
+                                            </div>
+                                            <a href="/cancelOrder/{{this._id}}?status=Cancelled"
+                                                class="mt-2 btn btn-outline-danger btn-sm">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+    </section>
+
+    {{!-- {{/if}} --}}
+    <!-- Footer-->
+    {{!-- <footer class="py-5">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
+        </div>
+    </footer> --}}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <!-- Core theme JS-->
+</body>
+
+</html>

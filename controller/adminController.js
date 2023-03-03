@@ -75,7 +75,6 @@ var adminController = {
         for (let i = 1; i <= 12; i++) {
             monthlyData[i - 1] = monthlyDataObject[i] ?? 0
         }
-        console.log(monthlyData);
         let salesSum =monthlyDataArray[0].total;
 
         let users = await orderModel.distinct('userId')

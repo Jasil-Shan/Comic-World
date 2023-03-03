@@ -159,19 +159,19 @@
                                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                     <!-- Quantity -->
                                     <div class="d-flex mb-4" style="max-width: 300px">
-                                        <a class="btn btn-warning px-3 me-2" style="height: fit-content;"
-                                            href="/QuantityUpdate/{{this._id}}?Add=minus" />
+                                        <button onclick="Quantity('{{this._id}}','minus')"
+                                            class="btn btn-warning px-3 me-2" style="height: fit-content;" />
                                         <i class="fas fa-minus"></i>
-                                        </a>
+                                        </button>
                                         <div class="form-outline">
-                                            <input id="form1" min="1" max="10" name="quantity" value="{{this.quantity}}"
+                                            <input id="quantityBox{{this._id}}" min="1" max="10" name="quantity" value="{{this.quantity}}"
                                                 type="number" class="form-control" readonly />
                                             <label class="form-label" for="form1">Quantity</label>
                                         </div>
-                                        <a class="btn btn-warning px-3 ms-2" style="height: fit-content;"
-                                            href="/QuantityUpdate/{{this._id}}?Add=plus" />
+                                        <button onclick="Quantity('{{this._id}}','plus')"
+                                            class="btn btn-warning px-3 me-2" style="height: fit-content;" />
                                         <i class="fas fa-plus"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                     <!-- Quantity -->
 
@@ -258,7 +258,22 @@
             </div>
         </div>
     </section>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
+    <script>
+        function Quantity(id, query) {
+            axios.get(`/QuantityUpdate/${id}?Add=${query}`).then((result) => {
+                console.log(result)
+                let quantityBox = document.getElementById('quantityBox'+id)
+                if (result.data.plus) {
+                    quantityBox.value = Number(quantityBox.value)+1
+                }
+                else {
+                    quantityBox.value = Number(quantityBox.value)-1
+                }
+            })
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>

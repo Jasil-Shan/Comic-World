@@ -368,19 +368,21 @@ var userController = {
     getUserQuantityUpdate: async (req, res) => {
         try {
             let _id = req.session.user.id
-            let Action = req.query.Add
-            if (Action == 'plus') {
+            let Action =req.query.Add
+            console.log(Action);
+            if (Action=="plus") {
                 await userModel.updateOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $inc: { 'cart.$.quantity': 1 } })
-                res.redirect('/cart')
+                res.json({ plus: true })
             } else {
                 let cartProduct = await userModel.findOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } })
-                console.log(cartProduct)
-                if (cartProduct.cart[0].quantity <= 1) {
+                if (cartProduct.cart[0].quantity<=1) {
                     await userModel.updateOne({ _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $pull: { cart: { _id: req.params.proId } } })
+                    console.log('njjvjjjcj');
                 } else {
                     await userModel.updateOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $inc: { 'cart.$.quantity': -1 } })
                 }
-                res.redirect('/cart')
+                res.json({ minus: true })
+                
             }
         } catch (err) {
             console.log(err);

@@ -299,7 +299,7 @@ var userController = {
             products.forEach((item, index) => {
                 products[index].totalPrice = proPrice[index]
             })
-            
+
             let TotalAmount = 0
             products.forEach((item, index) => {
                 TotalAmount = (TotalAmount + (item.price * cart[index].quantity))
@@ -526,23 +526,13 @@ var userController = {
                     total: cart[i].quantity * item.price,
                     payment: req.body.paymentMethod
                 })
+                await productModel.updateOne({ _id: item._id }, { $inc: { stock: -1 * cart[i].quantity } });
                 i++;
             }
             req.session.user.orders = orders
             req.session.user.orderId = orderid
             let paymentMode = req.body.paymentMethod
             if (paymentMode != 'COD') {
-                // if (walletUse) {
-                //     req.session.wallet = {
-                //         amount: walletUse
-                //     }
-                // }
-
-                // // if (couponcode) {
-                // //     req.session.coupon = {
-                // //         code: couponcode
-                // //     }
-                // // }
                 let total = req.session.user.TotalAmount
                 let orderId = "order_" + orderid;
                 const options = {
@@ -591,14 +581,15 @@ var userController = {
                     res.render('orderSuccess', { Log })
                 }
                 else {
-                    const Pro = await orderModel.find({orderId:orderid},{product:{_id},quantity:1})
-                    Pro.forEach((item,indes)=>{
-                        let _id = item._id
-                        let quantity = item.quantity
-                        productModel.updateOne({_id},{$set:{stock:-quantity}})
-                    })
-                
-                    console.log(Pro);
+                    // const Pro = await orderModel.find({orderId:orderid},{product:{_id},quantity:1})
+                    // console.log("kjkhjk",Pro);
+                    // Pro.forEach((item,index)=>{
+                    //     let proid = item[index]
+                    //     let quantity = item[index]
+                    //     console.log(proid);
+                    //     // productModel.updateOne({proid},{$set:{stock:-quantity}})
+                    // })
+
                     await userModel.findByIdAndUpdate({ _id }, { $set: { cart: [] } })
                     res.render('orderSuccess', { Log })
                 }

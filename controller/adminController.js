@@ -53,28 +53,35 @@ var adminController = {
         }
     },
     getAdmindash: async (req, res) => {
-        const order = await orderModel.find({orderStatus:'Delivered'})
-        console.log(order);
-        let salesCount = 0
-        let result = 0
-        let salesSum = 0
-        if(order){
-         salesCount = await orderModel.find().count();
 
-         result = await orderModel.aggregate([{
+        let salesCount = await orderModel.find().count();
+
+        let monthlyDataArray = await orderModel.aggregate([{
+            $match: { orderStatus: 'Delivered' }
+        },
+        {
             $group: {
-                _id: null,
+                _id: { $month: "$createdAt" },
                 total: {
                     $sum: '$total'
                 }
             }
         }])
-        salesSum = result[0].total;
-       }
+        let monthlyDataObject = {}
+        monthlyDataArray.map(item => {
+            monthlyDataObject[item._id] = item.total
+        })
+        let monthlyData = []
+        for (let i = 1; i <= 12; i++) {
+            monthlyData[i - 1] = monthlyDataObject[i] ?? 0
+        }
+        console.log(monthlyData);
+        let salesSum =monthlyDataArray[0].total;
+
         let users = await orderModel.distinct('userId')
         let userCount = users.length
 
-        res.render('admindash', { salesCount, salesSum, userCount })
+        res.render('admindash', { salesCount, salesSum, userCount ,monthlyData})
     },
     getAdminproduct: async (req, res) => {
         try {
@@ -421,7 +428,7 @@ var adminController = {
             const _id = req.query.id
             if (status) {
                 if (status == "Delivered") {
-                 await orderModel.updateOne({ _id }, { paid: true })
+                    await orderModel.updateOne({ _id }, { paid: true })
                 }
                 await orderModel.updateOne({ _id }, { orderStatus: status })
             }
@@ -433,6 +440,9 @@ var adminController = {
             console.log(error);
         }
     },
+    getadminSalesReport:(req,res)=>{
+        res.render('salesReport')
+    }
 }
 
 

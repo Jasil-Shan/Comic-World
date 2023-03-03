@@ -17,11 +17,11 @@ const hbs = require('hbs')
 app.set("view engine", "hbs")
 DBconnect() //database
 
-// app.use(function(req, res, next){
-//     if(!req.user)
-//     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-//     next();
-// });
+app.use(function(req, res, next){
+    if(!req.user)
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    next();
+});
 
 hbs.registerHelper("inc", function (value, options) {
   return parseInt(value) + 1;

@@ -17,7 +17,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0000004a;">
 			<div class="container px-4 px-lg-5">
-				<a class="navbar-brand text-warning font-weight-bold" style="font-size: x-large;" href="#!">Comic
+				<a class="navbar-brand text-warning font-weight-bold" style="font-size: x-large;" href="/">Comic
 					World</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -31,10 +31,10 @@
 					</ul>
 					<form class="d-flex">
 						<a href="/Cart" class="btn- text-light btn-sm mr-3" type="submit">
-							<i class="bi-cart-fill me-2"></i><span>Cart</span>
+							<i class="bi-cart-fill mr-2"></i><span>Cart</span>
 						</a>
 						<a href="/Wishlist" class="btn text-light btn-sm  mr-" type="submit">
-							<i class="bi bi-bag-heart-fill me-2"></i><span>Wishlist</span>
+							<i class="bi bi-bag-heart-fill mr-2"></i><span>Wishlist</span>
 							{{!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> --}}
 						</a>
 						{{#if Log}}
@@ -42,16 +42,16 @@
 							<i class="bi bi-person-circle me-2"></i>{{Log.name}}</i>
 
 						</a> --}}
-						<div class="dropdown ml-2">
+						<span class="dropdown ml-2">
 							<button class="btn text-light dropdown-toggle" type="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-person-circle me-2"></i> {{Log.name}}
+								<i class="bi bi-person-circle mr-2"></i> {{Log.name}}
 							</button>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="/UserProfile">Profile</a></li>
 								<li><a class="dropdown-item" href="/UserLogout">Logout</a></li>
 							</ul>
-						</div>
+						</span>
 						{{else}}
 						<a href="/Login" class="btn btn-sm btn-outline-warning" type="submit">
 							<i class="bi bi-door-open"></i></i>

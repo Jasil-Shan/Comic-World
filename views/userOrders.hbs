@@ -124,12 +124,19 @@
                             </div>
                         </div>
                         <!-- Product actions-->
+                        {{#if_eq this.orderStatus "Cancelled"}}
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a type="button"
+                                    class="btn text-danger mt-auto">Cancelled</a>
+                            </div>
+                        </div>
+                        {{else}}
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center"><a type="button" data-bs-toggle="modal"
                                     data-bs-target="#{{this._id}}" class="btn text-light mt-auto">Track</a>
                             </div>
                         </div>
-                        <!-- Modal -->
+                        {{/if_eq}}
                         <div class="modal fade" id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -140,7 +147,6 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-start px-4 pt-0 pb-4">
-
                                         <div class="text-center">
                                             <h5 class="mb-3">Order Status</h5>
                                             <h5 class="mb-5">Order ID- {{this.orderId}}</h5>

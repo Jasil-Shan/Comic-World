@@ -97,7 +97,7 @@
                      {{#each Banners}}
                      <tr>
                         <th scope="row">{{inc @index}}</th>
-                        <td><img width="70px" height="60px" src="/admin/images/{{this.image.[0].filename}}" alt=""></td>
+                        <td><img width="70px" height="60px" src="{{this.image.url}}" alt=""></td>
                         <td>{{this.name}}</td>
                         <td>{{this.caption}}</td>
                         <td>

@@ -77,73 +77,76 @@
             </li>
     </aside>
     <main id="main" class="main">
-<section class="section dashboard">
-         <div class="row">
-            <div class="col-lg-8">
-               <div class="row">
-                  <div class="col-xxl-4 col-md-6">
-                     <div class="card info-card sales-card">
-                        <div class="card-body">
-                           <h5 class="card-title">Sales <span></span></h5>
-                           <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
-                                    class="bi bi-cart"></i></div>
-                              <div class="ps-3">
-                                 <h6>{{salesCount}}</h6>
-                                 <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                    class="text-muted small pt-2 ps-1">increase</span>
-                              </div>
-                           </div>
+        <section class="section dashboard">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-xxl-4 col-md-6">
+                            <div class="card info-card sales-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sales <span></span></h5>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-cart"></i></div>
+                                        <div class="ps-3">
+                                            <h6>{{salesCount}}</h6>
+                                            <span class="text-success small pt-1 fw-bold">12%</span> <span
+                                                class="text-muted small pt-2 ps-1">increase</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="col-xxl-4 col-md-6">
-                     <div class="card info-card revenue-card">
-                        <div class="card-body">
-                           <h5 class="card-title">Revenue</h5>
-                           <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
-                                    class="bi bi-currency-dollar"></i></div>
-                              <div class="ps-3">
-                                 <h6><i class="bi bi-currency-rupee"></i>{{salesSum}}</h6>
-                                 <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                    class="text-muted small pt-2 ps-1">increase</span>
-                              </div>
-                           </div>
+                        <div class="col-xxl-4 col-md-6">
+                            <div class="card info-card revenue-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Revenue</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-currency-dollar"></i></div>
+                                        <div class="ps-3">
+                                            <h6><i class="bi bi-currency-rupee"></i>{{salesSum}}</h6>
+                                            <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                                class="text-muted small pt-2 ps-1">increase</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="col-xxl-4 col-xl-12">
-                     <div class="card info-card customers-card">
-                        {{!-- <div class="filter">
-                           <a class="icon"  data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                 <h6>Filter</h6>
-                              </li>
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                           </ul>
-                        </div> --}}
-                        <div class="card-body">
-                           <h5 class="card-title">Customers</h5>
-                           <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
-                                    class="bi bi-people"></i></div>
-                              <div class="ps-3">
-                                 <h6>{{userCount}}</h6>
-                                 <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                    class="text-muted small pt-2 ps-1">decrease</span>
-                              </div>
-                           </div>
+                        <div class="col-xxl-4 col-xl-12">
+                            <div class="card info-card customers-card">
+                                {{!-- <div class="filter">
+                                    <a class="icon" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div> --}}
+                                <div class="card-body">
+                                    <h5 class="card-title">Customers</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i></div>
+                                        <div class="ps-3">
+                                            <h6>{{userCount}}</h6>
+                                            <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                                class="text-muted small pt-2 ps-1">decrease</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
 
-               </div>
-            </div>
-      </section>
+                    </div>
+                </div>
+        </section>
         <div class="mt-4">
             <div class="input-group">
                 <form action="/admin/salesReport" method="get">
@@ -151,15 +154,16 @@
                         type="date" name="to">
 
                     <button type="submit" class="btn btn-sm btn-success rounded mt-3">Filter</button>
-                    
+
 
                 </form>
-                
+
             </div>
             <div class="d-flex justify-content-end">
-                        <button onclick=" downloadPdf()" class="btn btn-sm btn-success rounded">Download as PDF</button>
-                        <button onclick=" downloadExcel()" class="ms-3 btn btn-sm btn-success rounded">Download as Excel</button>
-                    </div>
+                <button onclick=" downloadPdf()" class="btn btn-sm btn-success rounded">Download as PDF</button>
+                <button onclick=" downloadExcel()" class="ms-3 btn btn-sm btn-success rounded">Download as
+                    Excel</button>
+            </div>
             <h3 class="text-dark mt-4">Orders</h3>
             <div class="card mt-3">
                 <div class="card-body pt-2">
@@ -174,6 +178,7 @@
                                 <th scope="col">Amount</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Payment Mode</th>
                                 <th scope="col">Payment Status</th>
 
                             </tr>
@@ -188,6 +193,7 @@
                                 <td>{{this.total}}</td>
                                 <td>{{this.quantity}}</td>
                                 <td> <span class="badge text-bg-success">{{this.orderStatus}}</span></td>
+                                <td>{{this.payment}}</td>
                                 <td>Paid</td>
                             </tr>
                             {{/each}}
@@ -230,57 +236,59 @@
 
     </main>
 
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
 
-<script>
-  
-    let orders=[]
-    {{#each products}}
-    orders.push(['{{this.address.name}}','{{this.product.name}}','{{this.orderDate}}','{{this.quantity}}','{{this.total}}'
-    ,'{{this.orderStatus}}'])
-    {{/each}}
-    let totalRevenue= '{{salesSum}}'
-    let totalOrders= '{{salesCount}}'
-    let Customers= '{{userCount}}'
- const { jsPDF } = window.jspdf;
-function downloadPdf() {
-      const doc= new jsPDF();
-      doc.text(15, 20, "Comic World Sales Report ");
-      doc.autoTable({
-        head: [['Type', 'Details']],
-        body: [
-              ['Total Sales', totalOrders],
-              ['Total Revenue', totalRevenue],
-              ['Total Customers', Customers],
-              ],
-        startY: 40
-      })
-      doc.text(15, doc.lastAutoTable.finalY+20, "order info");
-      doc.autoTable({
-        head: [['UserName','Product', 'Odrer Date','Quantity','Amount', "Status"]],
-        body: orders,
-        startY: doc.lastAutoTable.finalY + 30
-      })
-      doc.save('sales-report.pdf');
-    }
-    function downloadExcel(){
-                let report=[
-                  {type:"Total Sales", value:totalOrders},
-                  {type:"Total Revenue", value:totalRevenue},
-                  {type:"Total Customers", value:Customers},
-                ]
-          
-                  var sheet1 = XLSX.utils.json_to_sheet(report);
-                  var wb = XLSX.utils.book_new();
-                  XLSX.utils.book_append_sheet(wb, sheet1, "Sales Report");
-                   
-          
-                  XLSX.writeFile(wb,'sales-report.xlsx');
-              }
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script>
+
+    <script>
+
+        let orders = []
+        { { #each products } }
+        orders.push(['{{this.address.name}}', '{{this.product.name}}', '{{this.orderDate}}', '{{this.quantity}}', '{{this.total}}'
+            , '{{this.orderStatus}}'])
+        {
+            {
+                /each}}
+                let totalRevenue = '{{salesSum}}'
+                let totalOrders = '{{salesCount}}'
+                let Customers = '{{userCount}}'
+                const { jsPDF } = window.jspdf;
+                function downloadPdf() {
+                    const doc = new jsPDF();
+                    doc.text(15, 20, "Comic World Sales Report ");
+                    doc.autoTable({
+                        head: [['Type', 'Details']],
+                        body: [
+                            ['Total Sales', totalOrders],
+                            ['Total Revenue', totalRevenue],
+                            ['Total Customers', Customers],
+                        ],
+                        startY: 40
+                    })
+                    doc.text(15, doc.lastAutoTable.finalY + 20, "order info");
+                    doc.autoTable({
+                        head: [['UserName', 'Product', 'Odrer Date', 'Quantity', 'Amount', "Status"]],
+                        body: orders,
+                        startY: doc.lastAutoTable.finalY + 30
+                    })
+                    doc.save('sales-report.pdf');
+                }
+                function downloadExcel() {
+                    let report = [
+                        { type: "Total Sales", value: totalOrders },
+                        { type: "Total Revenue", value: totalRevenue },
+                        { type: "Total Customers", value: Customers },
+                    ]
+
+                    var sheet1 = XLSX.utils.json_to_sheet(report);
+                    var wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, sheet1, "Sales Report");
+
+
+                    XLSX.writeFile(wb, 'sales-report.xlsx');
+                }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

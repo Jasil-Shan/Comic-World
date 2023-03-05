@@ -7,6 +7,12 @@ const arouter = require("./routes/admnRouter")
 const DBconnect = require('./config/DBconnect')
 require('dotenv').config()
 const hbs = require('hbs')
+const cloudinary = require('cloudinary')
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 
 // app.use((req, res, next) => {

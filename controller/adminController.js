@@ -7,7 +7,12 @@ const multer = require('multer');
 const BannerModel = require('../models/bannerModel');
 const couponModel = require('../models/couponModel');
 const orderModel = require('../models/OrderModel');
-
+const cloudinary = require('cloudinary')
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 var adminController = {
 
@@ -198,10 +203,20 @@ var adminController = {
 
         }
     },
-    postAdminAddProduct: (req, res) => {
+    postAdminAddProduct: async (req, res) => {
         try {
+            let mainImage = req.files.image
+            let subImages = req.files.SubImage
+            let imageFile = await cloudinary.uploader.upload(mainImage.path, { folder: 'Comic World' })
+            let product = imageFile
+
+            for (let i in subImages) {
+                let imageFile = await cloudinary.uploader.upload(subImages[i].path, { folder: 'Comic World' })
+                subImages[i] = imageFile
+            }
             const { name, description, category, subCategory, mrp, price, stock, Status } = req.body
-            let Product = new productModel({ name, description, category, subCategory, mrp, price, stock, Status, image: req.files.image, SubImage: req.files.SubImage })
+
+            let Product = new productModel({ name, description, category, subCategory, mrp, price, stock, Status })
             Product.save((err, data) => {
                 if (err) {
                     console.log(err)
@@ -254,20 +269,36 @@ var adminController = {
             console.log(err);
         }
     },
-    postProductUpdate: (req, res) => {
-        const { _id, name, description, Category, subCategory, mrp, price, stock } = req.body
-        console.log(req.body);
-        productModel.findByIdAndUpdate(
-            _id,
-            { $set: { name, description, Category, subCategory, mrp, price, stock, image: req.files.image, SubImage: req.files.SubImage } },
-            function (err, data) {
-                if (err) {
-                    res.render("EditAdminProduct", { error: true });
-                } else {
-                    res.redirect("/admin/products");
+    postProductUpdate: async (req, res) => {
+
+        try {
+            let mainImage = req.files.image[0]
+            console.log(mainImage);
+            // let subImages = req.files.SubImage
+            let imageFile = await cloudinary.uploader.upload(mainImage.path, { folder: 'Comic World' })
+            console.log(imageFile);
+            let product = imageFile
+    
+            // for (let i in subImages) {
+            //     let imageFile = await cloudinary.uploader.upload(subImages[i].path, { folder: 'Comic World' })
+            //     subImages[i] = imageFile
+            // }
+            const { _id, name, description, Category, subCategory, mrp, price, stock } = req.body
+    
+            productModel.findByIdAndUpdate(
+                _id,
+                { $set: { name, description, Category, subCategory, mrp, price, stock,image:product} },
+                function (err, data) {
+                    if (err) {
+                        res.render("EditAdminProduct", { error: true });
+                    } else {
+                        res.redirect("/admin/products");
+                    }
                 }
-            }
-        )
+            )
+        }catch (err) {
+            console.log(err);
+        }
     },
     getEditCategory: async (req, res) => {                          //edit
 
@@ -350,11 +381,22 @@ var adminController = {
 
         res.render('adminAddBanner')
     },
-    postAdminSaveBanner: (req, res) => {
+    postAdminSaveBanner: async (req, res) => {
 
         try {
+
+            let mainImage = req.files.image[0]
+            // let subImages = req.files.SubImage[0]
+            let imageFile = await cloudinary.uploader.upload(mainImage.path, { folder: 'Comic World' })
+            let images = imageFile
+
+            // for (let i in subImages) {
+            //     let imageFile = await cloudinary.uploader.upload(subImages[i].path, { folder: 'Comic World' })
+            //     subImages[i] = imageFile
+            // }
+
             const { name, caption } = req.body
-            let Banner = new BannerModel({ name, caption, image: req.files.image })
+            let Banner = new BannerModel({ name, caption, image: images })
             Banner.save((err, data) => {
                 if (err) {
                     console.log(err)
@@ -469,17 +511,19 @@ var adminController = {
                     }
                 }
             }])
-            salesSum = result[0].total;
+            if (result[0].total) {
+                salesSum = result[0].total;
+            }
         }
         let users = await orderModel.distinct('userId')
         let userCount = users.length
 
         res.render('adminSalesReport', { products, userCount, salesCount, salesSum })
     },
-  
 
 
-    
+
+
 }
 
 

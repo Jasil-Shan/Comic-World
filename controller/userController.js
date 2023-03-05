@@ -13,7 +13,6 @@ const uid = uniqid()
 const axios = require('axios')
 const createId = require('../middleware/createId')
 
-
 let OTP = Math.floor(Math.random() * 1000000);
 let CheckOTP
 let UserDetails
@@ -378,7 +377,7 @@ var userController = {
             } else {
                 let cartProduct = await userModel.findOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } })
                 if (cartProduct.cart[0].quantity<=1) {
-                    await userModel.updateOne({ _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $pull: { cart: { _id: req.params.proId } } })
+                    res.json({modal:true})
                     console.log('njjvjjjcj');
                 } else {
                     await userModel.updateOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $inc: { 'cart.$.quantity': -1 } })

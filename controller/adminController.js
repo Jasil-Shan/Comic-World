@@ -54,7 +54,7 @@ var adminController = {
     },
     getAdmindash: async (req, res) => {
 
-        let salesCount = await orderModel.find().count();
+        let salesCount = await orderModel.find({ orderStatus: 'Delivered' }).count();
 
         let monthlyDataArray = await orderModel.aggregate([{
             $match: { orderStatus: 'Delivered' }
@@ -71,16 +71,17 @@ var adminController = {
         monthlyDataArray.map(item => {
             monthlyDataObject[item._id] = item.total
         })
+        console.log(monthlyDataArray);
         let monthlyData = []
         for (let i = 1; i <= 12; i++) {
             monthlyData[i - 1] = monthlyDataObject[i] ?? 0
         }
-        let salesSum =monthlyDataArray[0].total;
-
+        console.log(monthlyData);
+        let salesSum = monthlyDataArray.reduce((a, curr) => a + curr.total, 0);
         let users = await orderModel.distinct('userId')
         let userCount = users.length
 
-        res.render('admindash', { salesCount, salesSum, userCount ,monthlyData})
+        res.render('admindash', { salesCount, salesSum, userCount, monthlyData })
     },
     getAdminproduct: async (req, res) => {
         try {
@@ -439,9 +440,46 @@ var adminController = {
             console.log(error);
         }
     },
-    getadminSalesReport:(req,res)=>{
-        res.render('salesReport')
-    }
+    getadminSalesReport: async (req, res) => {
+        let from = req.query.from
+        let to = req.query.to
+        let products
+        let salesCount
+        let result
+        let salesSum
+        let order
+        if (from) {
+            order = await orderModel.find({ createdAt: { $gte: from, $lt: to } }).lean()
+            products = order.filter(e => e.orderStatus == 'Delivered')
+            salesCount = await orderModel.find({ createdAt: { $gte: from, $lt: to } }, { orderStatus: 'Delivered' }).count()
+
+            salesSum = products.reduce((a, curr) => a + curr.total, 0);
+        } else {
+            products = await orderModel.find({ orderStatus: 'Delivered' })
+            console.log(products);
+            salesCount = await orderModel.find({ orderStatus: 'Delivered' }).count();
+            result = await orderModel.aggregate([{
+                $match: { orderStatus: 'Delivered' }
+            },
+            {
+                $group: {
+                    _id: null,
+                    total: {
+                        $sum: '$total'
+                    }
+                }
+            }])
+            salesSum = result[0].total;
+        }
+        let users = await orderModel.distinct('userId')
+        let userCount = users.length
+
+        res.render('adminSalesReport', { products, userCount, salesCount, salesSum })
+    },
+  
+
+
+    
 }
 
 

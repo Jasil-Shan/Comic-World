@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAdminlogin, postAdminLogin, getAdminUser, getAdmindash, getAdminproduct, getAdmincategory, getAdminUserBlock, getadminlogout, getAdminuserUnblock, postadminSearch, getAdminAddCat, postAdminAddCat, getAdminCatDelete, getAdminAddProduct, postAdminAddProduct, getAdminDeleteProduct, getAdminEditProduct, putAdminEditProduct, postProductUpdate, getEditCategory, postEditCategory, getAdminProductList, getAdminProductUnlist, postAdminSearchProduct, getAdminBanner, getAdminAddBanner, postAdminSaveBanner, getAdminDeleteBanner, getAdminCoupon, getAdminAddCoupon, postAdminAddCoupon, getDeleteCoupon, getCouponRedeem, getAdminOrder, getAdminOrderManage, getadminSalesReport } = require('../controller/adminController')
+const { getAdminlogin, postAdminLogin, getAdminUser, getAdmindash, getAdminproduct, getAdmincategory, getAdminUserBlock, getadminlogout, getAdminuserUnblock, postadminSearch, getAdminAddCat, postAdminAddCat, getAdminCatDelete, getAdminAddProduct, postAdminAddProduct, getAdminDeleteProduct, getAdminEditProduct, putAdminEditProduct, postProductUpdate, getEditCategory, postEditCategory, getAdminProductList, getAdminProductUnlist, postAdminSearchProduct, getAdminBanner, getAdminAddBanner, postAdminSaveBanner, getAdminDeleteBanner, getAdminCoupon, getAdminAddCoupon, postAdminAddCoupon, getDeleteCoupon, getCouponRedeem, getAdminOrder, getAdminOrderManage, getadminSalesReport, postadminSalesReport } = require('../controller/adminController')
 const multiUpload = require('../middleware/multer')
 const arouter = express.Router()
 const CategoryModel = require('../models/categoryModel')
@@ -45,6 +45,6 @@ arouter.get("/DeleteCoupon/:id",verifyAdmin,getDeleteCoupon)
 arouter.get("/salesReport",verifyAdmin,getadminSalesReport)
 
 
-
+ 
  
 module.exports = arouter

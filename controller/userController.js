@@ -352,9 +352,11 @@ var userController = {
     getAddtoCart: async (req, res) => {
 
         try {
+            console.log('ha');
             const _id = req.session.user.id
 
             const productId = req.params.id
+            console.log(productId);
 
             await userModel.updateOne({ _id }, { $addToSet: { cart: { _id: productId, quantity: 1 } } })
 

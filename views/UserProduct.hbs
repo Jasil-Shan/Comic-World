@@ -85,12 +85,10 @@
                         title="Move to the wish list">
                         <i class="fas fa-heart"></i>
                     </a>
-                    <form action="/AddCart/{{product._id}}" method="post" class="d-flex mt-4">
-                        <button class="btn btn-outline-light flex-shrink-0" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Add to cart
-                        </button>
-                    </form>
+                    <button onclick="addCart('{{product._id}}')" class="btn btn-outline-light flex-shrink-0">
+                        <i class="bi-cart-fill me-1"></i>
+                        Add to cart
+                    </button>
                 </div>
             </div>
         </div>
@@ -143,6 +141,17 @@
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
         </div>
     </footer>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+    <script>
+        function addCart(id) {
+            console.log(id)
+            axios.get('/AddCart/'+id).then(() => {
+                console.log('tdhdfhf')
+
+            })
+        }
+    </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

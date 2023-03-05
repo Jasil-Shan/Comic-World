@@ -26,7 +26,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
-<body style="height:100%;">
+<body style="height:100vh;">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0000004a;">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand text-warning fw-bold fs-2" href="#!">Comic World</a>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </nav>
-    <section class=" gradient-custom">
+    <section style="height:100%;" class=" gradient-custom">
         <div class="container py-5">
             <div class="row d-flex justify-content-center my-4">
                 <div class="col-md-8">
@@ -101,8 +101,7 @@
                                     <!-- Image -->
                                     <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                         data-mdb-ripple-color="light">
-                                        <img src="{{this.image.[0].url}}" class="w-100"
-                                            alt="{{this.name}}" />
+                                        <img src="{{this.image.[0].url}}" class="w-100" alt="{{this.name}}" />
                                         <a href="#!">
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                                         </a>
@@ -164,8 +163,8 @@
                                         <i class="fas fa-minus"></i>
                                         </button>
                                         <div class="form-outline">
-                                            <input id="quantityBox{{this._id}}" min="1" max="10" name="quantity" value="{{this.quantity}}"
-                                                type="number" class="form-control" readonly />
+                                            <input id="quantityBox{{this._id}}" min="1" max="10" name="quantity"
+                                                value="{{this.quantity}}" type="number" class="form-control" readonly />
                                             <label class="form-label" for="form1">Quantity</label>
                                         </div>
                                         <button onclick="Quantity('{{this._id}}','plus')"
@@ -264,12 +263,12 @@
         function Quantity(id, query) {
             axios.get(`/QuantityUpdate/${id}?Add=${query}`).then((result) => {
                 console.log(result)
-                let quantityBox = document.getElementById('quantityBox'+id)
+                let quantityBox = document.getElementById('quantityBox' + id)
                 if (result.data.plus) {
-                    quantityBox.value = Number(quantityBox.value)+1
+                    quantityBox.value = Number(quantityBox.value) + 1
                 }
                 else {
-                    quantityBox.value = Number(quantityBox.value)-1
+                    quantityBox.value = Number(quantityBox.value) - 1
                 }
             })
         }

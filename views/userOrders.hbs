@@ -138,49 +138,53 @@
                                     <div class="modal-header border-bottom-0">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
-
                                     </div>
                                     <div class="modal-body text-start px-4 pt-0 pb-4">
+
                                         <div class="text-center">
                                             <h5 class="mb-3">Order Status</h5>
                                             <h5 class="mb-5">Order ID- {{this.orderId}}</h5>
                                         </div>
+                                        {{#if_eq this.orderStatus "Pending"}}
                                         <div class="progress bg-dark" role="progressbar" aria-label="Success example"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                             <div class="progress-bar bg-success" style="width: 25%"></div>
                                         </div>
+                                        {{/if_eq}}
+                                        {{#if_eq this.orderStatus "Shipped"}}
+                                        <div class="progress bg-dark" role="progressbar" aria-label="Success example"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar bg-success" style="width: 35%"></div>
+                                        </div>
+                                        {{/if_eq}}
+                                        {{#if_eq this.orderStatus "Out for Delivery"}}
+                                        <div class="progress bg-dark" role="progressbar" aria-label="Success example"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar bg-success" style="width: 60%"></div>
+                                        </div>
+                                        {{/if_eq}}
+                                        {{#if_eq this.orderStatus "Delivered"}}
+                                        <div class="progress bg-dark" role="progressbar" aria-label="Success example"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar bg-success" style="width: 100%"></div>
+                                        </div>
+                                        {{/if_eq}}
                                         <div class="d-flex justify-content-between mb-5">
                                             <div class="text-center">
-                                                <i class="fas fa-circle"></i>
-                                                <p>Order placed</p>
+
+                                                <p> Order Placed</p>
                                             </div>
 
                                             <div class="text-center">
-                                                {{#if_eq this.orderStatus "Shipped"}} <i class="fas fa-circle"
-                                                    style="color: #0cf92c;"></i>
-                                                    <p>In Transit</p>
-                                               {{else}}
-                                                <i class="fas fa-circle"></i>
+
                                                 <p>In Transit</p>
-                                                 {{/if_eq}}
                                             </div>
                                             <div class="text-center">
-                                                 {{#if_eq this.orderStatus "Out for Delivery"}} <i class="fas fa-circle"
-                                                    style="color: #0cf92c;"></i>
-                                                    <p>Out for Delivery</p>
-                                               {{else}}
-                                                <i class="fas fa-circle"></i>
                                                 <p> Out for Delivery</p>
-                                                 {{/if_eq}}
                                             </div>
                                             <div class="text-center">
-                                                {{#if_eq this.orderStatus "Delivered"}} <i class="fas fa-circle"
-                                                    style="color: #0cf92c;"></i>
-                                                    <p>Delivered</p>
-                                               {{else}}
-                                                <i class="fas fa-circle"></i>
+
                                                 <p>Delivered</p>
-                                                 {{/if_eq}}
                                             </div>
                                         </div>
 

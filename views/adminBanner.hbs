@@ -206,6 +206,15 @@
             padding-left: calc(var(--nav-width) + 188px)
          }
       }
+      @media screen and (max-width: 768px) {
+      .card{
+         width: fit-content;
+      }
+      body{
+         height: fit-content;
+
+      }
+     }
    </style>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
    <script src="/admin/js/sidebar.js"></script>
@@ -255,7 +264,7 @@
             <a type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
          </div>
          {{/if}} --}}
-         <div class="card shadow p-3 mb-5 rounded mt-3" style="width: fit-content;">
+         <div class="card shadow p-3 mb-5 rounded mt-3" >
             <div class="card-body pt-2">
 
                <table class="table table-borderless table-white  table-hover mt-2 ">

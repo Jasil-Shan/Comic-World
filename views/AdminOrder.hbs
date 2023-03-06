@@ -32,7 +32,7 @@
         :root {
             --header-height: 3rem;
             --nav-width: 68px;
-                     --first-color: #000000;
+            --first-color: #000000;
 
             --first-color-light: #AFA5D9;
             --white-color: #F7F6FB;
@@ -210,6 +210,17 @@
                 padding-left: calc(var(--nav-width) + 188px)
             }
         }
+
+        @media screen and (max-width: 768px) {
+            .card {
+                width: fit-content;
+            }
+
+            body {
+                height: fit-content;
+
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <script src="/admin/js/sidebar.js"></script>
@@ -223,34 +234,37 @@
         <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
     </header>
     <div class="l-navbar" id="nav-bar">
-      <nav class="nav">
-         <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                  class="nav_logo-name">Admin</span> </a>
-            <div class="nav_list"> <a href="/admin/dash" title="Dashboard" class="nav_link "> <i
-                     class='bx bx-grid-alt nav_icon'></i>
-                  <span class="nav_name">Dashboard</span> </a> <a title="Users" href="/admin/user" class="nav_link"> <i
-                     class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-               <a title="Products" href="/admin/products" class="nav_link ">  <i class='bx bx-folder nav_icon'></i><span class="nav_name">Products</span> </a>
-               <a title="Category" href="/admin/category" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i>
-                  <span class="nav_name">Category</span> </a>
-               <a title="Banner" href="/admin/banner" class="nav_link"><i class='bx bxs-image nav_icon'></i> <span
-                     class="nav_name">Banner</span> </a>
-               <a title="Coupon" href="/admin/coupon" class="nav_link"> <i class='bx bxs-discount nav_icon'></i>
-                  <span class="nav_name">
-                     Coupon</span> </a>
-               <a title="Orders" href="/admin/order" class="nav_link active"> <i class='bx bxs-pie-chart-alt-2 nav_icon' ></i>
-                  <span class="nav_name">Orders</span> </a>
-               <a title="Sales Report" href="/admin/salesReport" class="nav_link"> <i
-                     class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Sales
-                     Report</span> </a>
-            </div>
-         </div> <a href="/admin/Adminlogout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
-               class="nav_name">SignOut</span> </a>
-      </nav>
-   </div>
+        <nav class="nav">
+            <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
+                        class="nav_logo-name">Admin</span> </a>
+                <div class="nav_list"> <a href="/admin/dash" title="Dashboard" class="nav_link "> <i
+                            class='bx bx-grid-alt nav_icon'></i>
+                        <span class="nav_name">Dashboard</span> </a> <a title="Users" href="/admin/user"
+                        class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                    <a title="Products" href="/admin/products" class="nav_link "> <i
+                            class='bx bx-folder nav_icon'></i><span class="nav_name">Products</span> </a>
+                    <a title="Category" href="/admin/category" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i>
+                        <span class="nav_name">Category</span> </a>
+                    <a title="Banner" href="/admin/banner" class="nav_link"><i class='bx bxs-image nav_icon'></i> <span
+                            class="nav_name">Banner</span> </a>
+                    <a title="Coupon" href="/admin/coupon" class="nav_link"> <i class='bx bxs-discount nav_icon'></i>
+                        <span class="nav_name">
+                            Coupon</span> </a>
+                    <a title="Orders" href="/admin/order" class="nav_link active"> <i
+                            class='bx bxs-pie-chart-alt-2 nav_icon'></i>
+                        <span class="nav_name">Orders</span> </a>
+                    <a title="Sales Report" href="/admin/salesReport" class="nav_link"> <i
+                            class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Sales
+                            Report</span> </a>
+                </div>
+            </div> <a href="/admin/Adminlogout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">SignOut</span> </a>
+        </nav>
+    </div>
     <main id="main" class="main">
         <div class="mt-5">
-            <div class="card mt-3" style="width: fit-content;">
+            <div class="card mt-3"   
+>
                 <div class="card-body pt-2">
 
                     <table class="table table-hover table-borderless mt-2 ">

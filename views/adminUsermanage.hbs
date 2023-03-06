@@ -31,7 +31,7 @@
    :root {
       --header-height: 3rem;
       --nav-width: 68px;
-               --first-color: #000000;
+      --first-color: #000000;
 
       --first-color-light: #AFA5D9;
       --white-color: #F7F6FB;
@@ -181,33 +181,48 @@
          margin: calc(var(--header-height) + 1rem) 0 0 0;
          padding-left: calc(var(--nav-width) + 2rem)
       }
+   }
 
-      .header {
-         height: calc(var(--header-height) + 1rem);
-         padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
+   @media screen and (max-width: 768px) {
+      .card {
+         width: fit-content;
       }
+   }
 
-      .header_img {
-         width: 40px;
-         height: 40px
-      }
+   @media screen and (max-width: 768px) {
+      body {
+         height: fit-content;
 
-      .header_img img {
-         width: 45px
       }
+   }
 
-      .l-navbar {
-         left: 0;
-         padding: 1rem 1rem 0 0
-      }
 
-      .show {
-         width: calc(var(--nav-width) + 156px)
-      }
+   .header {
+      height: calc(var(--header-height) + 1rem);
+      padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
+   }
 
-      .body-pd {
-         padding-left: calc(var(--nav-width) + 188px)
-      }
+   .header_img {
+      width: 40px;
+      height: 40px
+   }
+
+   .header_img img {
+      width: 45px
+   }
+
+   .l-navbar {
+      left: 0;
+      padding: 1rem 1rem 0 0
+   }
+
+   .show {
+      width: calc(var(--nav-width) + 156px)
+   }
+
+   .body-pd {
+      padding-left: calc(var(--nav-width) + 188px)
+   }
    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -227,9 +242,10 @@
                   class="nav_logo-name">Admin</span> </a>
             <div class="nav_list"> <a href="/admin/dash" title="Dashboard" class="nav_link "> <i
                      class='bx bx-grid-alt nav_icon'></i>
-                  <span class="nav_name">Dashboard</span> </a> <a title="Users" href="/admin/user" class="nav_link active"> <i
-                     class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-               <a title="Products" href="/admin/products" class="nav_link">  <i class='bx bx-folder nav_icon'></i><span class="nav_name">Products</span> </a>
+                  <span class="nav_name">Dashboard</span> </a> <a title="Users" href="/admin/user"
+                  class="nav_link active"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+               <a title="Products" href="/admin/products" class="nav_link"> <i class='bx bx-folder nav_icon'></i><span
+                     class="nav_name">Products</span> </a>
                <a title="Category" href="/admin/category" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i>
                   <span class="nav_name">Category</span> </a>
                <a title="Banner" href="/admin/banner" class="nav_link"><i class='bx bxs-image nav_icon'></i> <span
@@ -237,7 +253,7 @@
                <a title="Coupon" href="/admin/coupon" class="nav_link"> <i class='bx bxs-discount nav_icon'></i>
                   <span class="nav_name">
                      Coupon</span> </a>
-               <a title="Orders" href="/admin/order" class="nav_link"> <i class='bx bxs-pie-chart-alt-2 nav_icon' ></i>
+               <a title="Orders" href="/admin/order" class="nav_link"> <i class='bx bxs-pie-chart-alt-2 nav_icon'></i>
                   <span class="nav_name">Orders</span> </a>
                <a title="Sales Report" href="/admin/salesReport" class="nav_link "> <i
                      class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Sales

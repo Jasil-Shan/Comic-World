@@ -389,7 +389,7 @@ var userController = {
             } else {
                 let cartProduct = await userModel.findOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } })
                 if (cartProduct.cart[0].quantity <= 1) {
-                    res.json({ modal: true })
+                    return res.json({minus:false, modal:true})
                 } else {
                     await userModel.updateOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $inc: { 'cart.$.quantity': -1 } })
                 }

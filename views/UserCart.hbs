@@ -54,7 +54,7 @@
                 <form class="d-flex">
                     <a href="/Cart" class="btn text-light btn-sm me-3" type="submit">
                         <i class="bi-cart-fill me-2"></i><span>Cart</span>
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+
                     </a>
                     <a href="/Wishlist" class="btn text-light btn-sm  me-3" type="submit">
                         <i class="bi bi-bag-heart-fill me-2"></i><span>Wishlist</span>
@@ -264,6 +264,31 @@
                                     Shipping Charge
                                     <span>Free Delivery</span>
                                 </li>
+
+
+                                {{#if Result}}
+                                <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <div class="text-success">
+                                        <span class="text-success">Coupon Applied</span>
+                                        <h6>Promo code </h6>
+                                        <span>{{Code}}</span>
+                                    </div>
+                                    <span class="text-success"><i class="bi bi-currency-rupee"></i>−{{minus}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Total </span>
+                                    <strong><i class="bi bi-currency-rupee"></i>{{Result}}</strong>
+                                </li>
+                                {{else}}
+                               
+                                <form class="card mt-2 p-2" method="get" action="/Cart">
+                                    {{#if Invalid}}<span class="text-danger">Coupon not Found</span>{{/if}}
+                                    <div class="input-group">
+                                        <input type="text" name="Coupon" class="form-control" placeholder="Promo code">
+                                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                                    </div>
+                                </form>
+                                {{/if}}
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                     <div>
@@ -274,8 +299,8 @@
                                     </div>
                                     <span><strong><i class="bi bi-currency-rupee"></i>{{TotalAmount}}</strong></span>
                                 </li>
-                            </ul>
 
+                            </ul>
                             <a href="/Checkout" class="btn btn-warning btn-lg btn-block">
                                 Go to checkout
                             </a>

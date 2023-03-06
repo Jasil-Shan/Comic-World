@@ -229,7 +229,35 @@ var userController = {
                         TotalAmount = (TotalAmount + (item.price * item.quantity))
                         Discount = (MRP - TotalAmount)
                     })
-                    res.render('UserCart', { products, TotalAmount, MRP, Discount, Log })
+                    console.log(TotalAmount);
+                    const code = req.query.Coupon
+                    req.session.user.TotalAmount = TotalAmount
+                    let Code
+                    let minus
+                    if (code) {
+                        let coupon = await couponModel.findOne({ code: code })
+                        if (coupon) {
+                            let expiry = coupon.expiry
+                            Code = coupon.code
+                            minus = coupon.cashback
+                            console.log(minus);
+
+                            let Total = TotalAmount
+                            console.log(TotalAmount);
+                            TotalAmount = Total - minus
+                            var Result = TotalAmount
+                            req.session.user.coupon = coupon
+
+                            req.session.user.TotalAmount = TotalAmount
+
+                        }
+                        else {
+                            var Invalid = true
+                        }
+                    }
+                    console.log(Result);
+                    console.log(code);
+                    res.render('UserCart', { products, TotalAmount, MRP, Discount, Log, Result, minus, Code, Invalid })
                 }
             }
             else {
@@ -298,32 +326,16 @@ var userController = {
             products.forEach((item, index) => {
                 products[index].totalPrice = proPrice[index]
             })
-
             let TotalAmount = 0
             products.forEach((item, index) => {
                 TotalAmount = (TotalAmount + (item.price * cart[index].quantity))
             })
-            req.session.user.TotalAmount = TotalAmount
+            TotalAmount =  req.session.user.TotalAmount
             const { address } = await userModel.findOne({ _id }, { address: 1 })
-            //CouponRedeem
-            const code = req.query.Coupon
-            if (code) {
-                let coupon = await couponModel.findOne({ code: code })
-                if (coupon) {
-                    let expiry = coupon.expiry
-                    // if (expiry > new Date){
-                    var Code = coupon.code
-                    var Discount = coupon.cashback
-                    let Total = req.session.user.TotalAmount
-                    req.session.user.TotalAmount = Total - Discount
-                    var Result = req.session.user.TotalAmount
-                    // }
-                }
-                else {
-                    var Invalid = true
-                }
-            }
-            res.render('Checkout', { products, TotalAmount, Log, address, Result, Discount, Code, Invalid, proPrice, Eaddress })
+            let Coupon = req.session.user.coupon
+            console.log(Coupon);
+
+            res.render('Checkout', { products, TotalAmount, Log, address, proPrice, Eaddress,Coupon })
         } catch (err) {
             console.log(err);
         }
@@ -369,21 +381,20 @@ var userController = {
     getUserQuantityUpdate: async (req, res) => {
         try {
             let _id = req.session.user.id
-            let Action =req.query.Add
+            let Action = req.query.Add
             console.log(Action);
-            if (Action=="plus") {
+            if (Action == "plus") {
                 await userModel.updateOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $inc: { 'cart.$.quantity': 1 } })
                 res.json({ plus: true })
             } else {
                 let cartProduct = await userModel.findOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } })
-                if (cartProduct.cart[0].quantity<=1) {
-                    res.json({modal:true})
-                    console.log('njjvjjjcj');
+                if (cartProduct.cart[0].quantity <= 1) {
+                    res.json({ modal: true })
                 } else {
                     await userModel.updateOne({ _id: _id, cart: { $elemMatch: { _id: req.params.proId } } }, { $inc: { 'cart.$.quantity': -1 } })
                 }
                 res.json({ minus: true })
-                
+
             }
         } catch (err) {
             console.log(err);

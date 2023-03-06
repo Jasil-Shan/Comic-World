@@ -90,7 +90,7 @@
                 <form class="d-flex text-center">
                     <a href="/Cart" class="btn btn-sm text-light me-3" type="submit">
                         <i class="bi-cart-fill me-2"></i><span>Cart</span>
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+
                     </a>
                     <a href="/Wishlist" class="btn btn-sm text-light me-3" type="submit">
                         <i class="bi bi-bag-heart-fill me-2"></i><span>Wishlist</span>
@@ -149,33 +149,26 @@
                             </div>
                             <span class="text-muted">Free Shipping</span>
                         </li>
-
-                        {{#if Result}}
                         <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <span class="text-success">Coupon Applied</span>
-                                <h6>Promo code </h6>
-                                <span>{{Code}}</span>
+                                    <div class="text-success">
+                                        <span class="text-success">Coupon Applied</span>
+                                        <h6>Promo code </h6>
+                                        <span>{{Coupon.code}}</span>
+                                    </div>
+                                    <span class="text-success"><i class="bi bi-currency-rupee"></i>−{{Coupon.cashback}}</span>
+                                </li>
+                        <li
+                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                            <div class="ms-2 me-2">
+                                <strong>Total amount</strong>
+                                <strong>
+                                    <p class="mb-0">(including VAT)</p>
+                                </strong>
                             </div>
-                            <span class="text-success"><i class="bi bi-currency-rupee"></i>−{{Discount}}</span>
+                            <span class="me-2"><strong><i class="bi bi-currency-rupee"></i>{{TotalAmount}}</strong></span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total </span>
-                            <strong><i class="bi bi-currency-rupee"></i>{{Result}}</strong>
-                        </li>
-                        {{else}}
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total</span>
-                            <strong><i class="bi bi-currency-rupee"></i>{{TotalAmount}}</strong>
-                        </li>
-                        <form class="card mt-2 p-2" method="get" action="/Checkout">
-                            {{#if Invalid}}<span class="text-danger">Coupon not Found</span>{{/if}}
-                            <div class="input-group">
-                                <input type="text" name="Coupon" class="form-control" placeholder="Promo code">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
-                            </div>
-                        </form>
-                        {{/if}}
+
+
                     </ul>
 
                     {{!-- Address --}}
@@ -306,58 +299,62 @@
         </footer>
     </div>
 
-    {{!-- <script>
-        {{!-- function submitCheckOut() {
-            axios.post('/checkout', document.querySelector('#order'), {
-                headers: {
-                    'Content-Type': 'application/json'
+    {{!--
+    <script>
+        {
+            {
+                !-- function submitCheckOut() {
+                    axios.post('/checkout', document.querySelector('#order'), {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then((result) => {
+                        if (result.data.COD) {
+                            window.location.href = '/orderSuccess'
+                        } else {
+                            razorpayPayment(result.data)
+                        }
+                    })
                 }
-            }).then((result) => {
-                if (result.data.COD) {
-                    window.location.href = '/orderSuccess'
-                } else {
-                    razorpayPayment(result.data)
-                }
-            })
-        }
-        function razorpayPayment(order) {
-            var options = {
-                "key": "rzp_test_XWC3duVSrJbw9K", // Enter the Key ID generated from the Dashboard
-                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": "INR",
-                "name": "Comic-World", //your business name
-                "description": "Online Transaction",
-                "image": "https://i.ibb.co/zSMfgvM/Logo.png",
-                "order_id": order.result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "handler": function (response) {
+                function razorpayPayment(order) {
+                    var options = {
+                        "key": "rzp_test_XWC3duVSrJbw9K", // Enter the Key ID generated from the Dashboard
+                        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": "Comic-World", //your business name
+                        "description": "Online Transaction",
+                        "image": "https://i.ibb.co/zSMfgvM/Logo.png",
+                        "order_id": order.result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                        "handler": function (response) {
 
-                    verifyPayment(response, order)
-                },
-                "prefill": {
-                    "name": order.name, //your customer's name
-                    "email": order.email,
-                    "contact": order.phone
-                },
-                "notes": {
-                    "address": "Razorpay Corporate Office"
-                },
-                "theme": {
-                    "color": "#3399cc"
+                            verifyPayment(response, order)
+                        },
+                        "prefill": {
+                            "name": order.name, //your customer's name
+                            "email": order.email,
+                            "contact": order.phone
+                        },
+                        "notes": {
+                            "address": "Razorpay Corporate Office"
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                    rzp1.open();
                 }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.open();
+                function verifyPayment(payment, order) {
+                    console.log('verify')
+                    axios.post('/verifyPayment', { payment, order }).then((resp) => {
+                        if (resp.data.success) {
+                            window.location.href = '/orderSuccess'
+                        } else {
+                            console.log("Payment failed")
+                        }
+                    })
+                } --}
         }
-        function verifyPayment(payment, order) {
-            console.log('verify')
-            axios.post('/verifyPayment', { payment, order }).then((resp) => {
-                if (resp.data.success) {
-                    window.location.href = '/orderSuccess'
-                } else {
-                    console.log("Payment failed")
-                }
-            })
-        } --}}
 
     </script> --}}
 

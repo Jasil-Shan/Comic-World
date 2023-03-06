@@ -186,13 +186,15 @@
    @media screen and (max-width: 768px) {
       .card {
          width: fit-content;
-      }
-   }
-
-   @media screen and (max-width: 768px) {
-      body {
          height: fit-content;
+         padding-left: 5vh;
+      }
+      body {
+         height: fit-content !important;
 
+      }
+      .search{
+         padding-left: 5vh;
       }
    }
 
@@ -223,7 +225,6 @@
    .body-pd {
       padding-left: calc(var(--nav-width) + 188px)
    }
-   }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <script src="/admin/js/sidebar.js"></script>
@@ -236,7 +237,7 @@
       <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
       <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
    </header>
-   <div class="l-navbar" id="nav-bar">
+   <div class="h-100 l-navbar" id="nav-bar">
       <nav class="nav">
          <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
                   class="nav_logo-name">Admin</span> </a>
@@ -264,7 +265,7 @@
       </nav>
    </div>
    <main id="main" class="main">
-      <div class="w-100 d-flex mb-2 flex-row-reverse">
+      <div class=" search w-100 d-flex mb-2 flex-row-reverse">
          <form class="d-flex" role="search" method="post" action="/admin/search-user">
             <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="key">
             <button class="btn btn-sm btn-outline-success me-3" type="submit">Search</button>

@@ -16,7 +16,10 @@ cloudinary.config({
 
 
 // app.use((req, res, next) => {
-//   res.status(404).render('404 page')})
+//   res.status(404).render('404 page')}
+app.get("/check", (req,res)=>{
+  res.send("beta version 1")
+})
 
 app.set("view engine", "hbs")
 DBconnect() //database

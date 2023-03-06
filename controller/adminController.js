@@ -6,7 +6,7 @@ var Handlebars = require('handlebars');
 const multer = require('multer');
 const BannerModel = require('../models/bannerModel');
 const couponModel = require('../models/couponModel');
-const orderModel = require('../models/OrderModel');
+const orderModel = require('../models/orderModel');
 const cloudinary = require('cloudinary')
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,

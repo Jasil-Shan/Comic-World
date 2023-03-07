@@ -4,7 +4,7 @@
 
 .searchbar{
 margin-bottom: auto;
-margin-top: auto;
+margin-top: 25px;
 height: 60px;
 background-color: #353b48;
 border-radius: 30px;
@@ -32,6 +32,20 @@ transition: width 0.4s linear;
 .searchbar:hover > .search_icon{
 background: white;
 color: #e74c3c;
+}
+
+@media screen and (max-width: 768px) {
+  .searchbar{
+    margin-top: 10px;
+    width: 300px;
+    background-color: #191a1b;
+    height: 60px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+    .search_icon{
+      visibility: hidden;
+    }
 }
 
 .search_icon{

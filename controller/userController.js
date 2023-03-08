@@ -569,7 +569,7 @@ var userController = {
                             customer_phone: '9946953906',
                         },
                         order_meta: {
-                            return_url: "http://localhost:2000/return?order_id={order_id}",
+                            return_url: "https://comicworld.store:2000/return?order_id={order_id}",
                         },
                     },
                 };

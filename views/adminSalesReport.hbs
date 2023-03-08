@@ -432,9 +432,8 @@
     <script>
 
         let orders = []
-        { { #each products } }
-        orders.push(['{{this.address.name}}', '{{this.product.name}}', '{{this.orderDate}}', '{{this.quantity}}', '{{this.total}}'
-            , '{{this.orderStatus}}'])
+        {{#each products}}
+        orders.push(['{{this.address.name}}', '{{this.product.name}}', '{{this.orderDate}}', '{{this.quantity}}', '{{this.total}}', '{{this.orderStatus}}'])
         {{/each}}
                 let totalRevenue = '{{salesSum}}'
                 let totalOrders = '{{salesCount}}'

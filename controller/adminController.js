@@ -8,6 +8,7 @@ const BannerModel = require('../models/bannerModel');
 const couponModel = require('../models/couponModel');
 const orderModel = require('../models/orderModel');
 const cloudinary = require('cloudinary')
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -278,6 +279,7 @@ var adminController = {
             let imageFile = await cloudinary.uploader.upload(mainImage.path, { folder: 'Comic World' })
             console.log(imageFile);
             let product = imageFile
+            
     
             // for (let i in subImages) {
             //     let imageFile = await cloudinary.uploader.upload(subImages[i].path, { folder: 'Comic World' })
@@ -474,10 +476,10 @@ var adminController = {
                 }
                 await orderModel.updateOne({ _id }, { orderStatus: status })
             }
-            const Orders = await orderModel.find({})
-
+            const Orders = await orderModel.find({}).sort()
+            console.log(Orders);
             res.render("AdminOrder", { Orders })
-
+            
         } catch (error) {
             console.log(error);
         }
@@ -504,7 +506,7 @@ var adminController = {
                 $match: { orderStatus: 'Delivered' }
             },
             {
-                $group: {
+                $group: { 
                     _id: null,
                     total: {
                         $sum: '$total'

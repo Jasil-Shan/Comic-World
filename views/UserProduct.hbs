@@ -69,9 +69,8 @@
     </nav>
     <!-- Product section-->
     <section class="py-5 text-white">
-        <a href="/Comic" class="text-white ms-5"><i class="bi bi-arrow-left-circle-fill"></i>
+        <a href="/Comic" style="text-decoration: none;" class="text-white ms-5"><i class="bi bi-arrow-left-circle-fill"></i>
             Back to Home</a>
-
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product.image.[0].url}}"
@@ -118,6 +117,7 @@
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {{#each RelatedProducts}}
                 <div class="col mb-5 ">
+                   <a class="btn text-light mt-auto" href="/Product/{{this._id}}">
                     <div class="card text-white rounded-5 " style="background-color: rgba(0, 0, 0, 0.963);">
                         <!-- Sale badge-->
                         <div class="badge bg-dark text-white me-2 position-absolute" style="top: 0.5rem; right: 0.5rem">
@@ -140,12 +140,8 @@
                             </div>
                         </div>
                         <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn text-light mt-auto"
-                                    href="/Product/{{this._id}}">View</a>
-                            </div>
-                        </div>
                     </div>
+                    </a>
                 </div>
                 {{/each}}
 

@@ -675,13 +675,17 @@ var userController = {
         try {
             const _id = req.params.id
             const status = req.query.status
-            await orderModel.updateOne({ _id }, { orderStatus: status })
+            const {quantity,product} = await orderModel.findById({_id},{quantity:1,product:1})
+            let proid = product._id
+            console.log(quantity);
+            console.log(product._id);
+            await orderModel.findByIdAndUpdate({ _id }, { orderStatus: status})
+            await productModel.findByIdAndUpdate({ _id:proid },{$inc:{ stock: quantity}})
             res.redirect("back")
-
         } catch (error) {
             console.log(error);
         }
-    },
+    }, 
     getPaymentURL: async (req, res) => {
         try {
             const order_id = req.query.order_id;

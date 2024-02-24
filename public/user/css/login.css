@@ -3,8 +3,7 @@
 }
 
 .gradient-custom-2 {
-    /* fallback for old browsers */
-    background-image: url('/user/images/Comic1.jpg') !important;
+    background-image: url('/user/images/login.jpg') !important;
     background-size: cover !important;
     
     /*Chrome 10-25, Safari 5.1-6 */
